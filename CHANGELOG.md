@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — unreleased
+## 1.0.0 — 2026-11-16
 
 - Initial ChatPush MCP server: local (stdio) and remote (Streamable HTTP) transports.
 - Hosted server: `send_file` takes only `file_base64` — `file_path` and `file_url` are not offered and are rejected, so the server's disk and internal network stay out of reach.
@@ -13,3 +13,5 @@
 - POST, PUT and PATCH send parameters in the request body instead of the URL: a 3500-character Cyrillic text made a 21 KB URL that ChatPush answered with HTTP 414 (the limit was about 1350 Cyrillic characters), and texts and phone numbers no longer land in access logs.
 - `send_message` / `send_bulk` describe the 938-character text limit when the routing includes SMS.
 - Unit tests (`npm test`), run in CI.
+- Claude Desktop extension (`.mcpb`) with the ChatPush icon; Glama maintainer set to the ChatPush side.
+- The hosted endpoint `https://mcp.chatpush.ru/mcp` is not listed in the MCP Registry yet: it is added in a later release, once the server is deployed.

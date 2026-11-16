@@ -36,6 +36,8 @@ Sign up at **[chatpush.ru](https://chatpush.ru)** and copy the API token from th
 
 ## Remote mode (hosted)
 
+> **Launching soon.** `mcp.chatpush.ru` is not live yet — until then use the local mode below.
+
 The hosted server exposes one MCP endpoint:
 
 ```

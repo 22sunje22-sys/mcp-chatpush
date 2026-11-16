@@ -33,19 +33,5 @@
         }
       ]
     }
-  ],
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://mcp.chatpush.ru/mcp",
-      "headers": [
-        {
-          "name": "Authorization",
-          "description": "Bearer <ChatPush API token from the dashboard>",
-          "isRequired": true,
-          "isSecret": true
-        }
-      ]
-    }
   ]
 }
