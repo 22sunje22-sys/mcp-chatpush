@@ -1,95 +1,52 @@
-# ChatPush MCP Server
+# ChatPush MCP — подключить Claude и ИИ-агентов к WhatsApp, Telegram, MAX и SMS
 
 [![CI](https://github.com/ChatPush/mcp-chatpush/actions/workflows/ci.yml/badge.svg)](https://github.com/ChatPush/mcp-chatpush/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/chatpush-mcp-server)](https://www.npmjs.com/package/chatpush-mcp-server)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-Official MCP server for [ChatPush](https://chatpush.ru) — send WhatsApp, Telegram, SMS, VK/OK and MAX messages, files and bulk mailings from AI agents.
+**Русский** · [English](README.en.md)
 
-It runs in two modes from the same codebase:
+Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, Cursor, VS Code или своему ИИ-агенту, и ассистент сам отправит сообщение, файл или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании. Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
 
-| Mode | Transport | Who it is for | Token |
-| --- | --- | --- | --- |
-| **Remote** | Streamable HTTP, hosted at `https://mcp.chatpush.ru/mcp` | Yandex and other platforms that connect to a URL; users with no local Node.js | Each caller sends their own token in the `Authorization` header |
-| **Local** | stdio, `npx -y chatpush-mcp-server` | Claude Desktop, Claude Code, Cursor, VS Code | `CHATPUSH_TOKEN` in the client config |
+*MCP server for WhatsApp, Telegram, MAX and SMS: Claude and AI agents send messages, files and bulk mailings through a ChatPush business account. [English README](README.en.md).*
 
-## Tools
+- **С ваших номеров.** Сообщения уходят с подключённых MAX, WhatsApp и Telegram, как из кабинета ChatPush.
+- **Каскад каналов.** Не дошло в один мессенджер — уйдёт в следующий, SMS последним.
+- **Без двойных отправок.** После сбоя сети сервер не повторяет отправку сам: ассистент сначала проверяет статус.
+- **19 инструментов.** Отправка, рассылки, файлы, статусы доставки, подключение мессенджера по QR, вебхуки, субаккаунты.
+- **Открытый код.** Лицензия MIT, пакет [`chatpush-mcp-server`](https://www.npmjs.com/package/chatpush-mcp-server) в npm, сервер есть в [официальном каталоге MCP](https://registry.modelcontextprotocol.io) под именем `io.github.ChatPush/mcp-chatpush`.
 
-| Tool | Description |
-| --- | --- |
-| `get_account` | Full account info: balance, dispatch routing, sender names, subscription, WhatsApp/Telegram session status |
-| `get_balance` | Balance, customer ID, dispatch routing channels and registered sender names |
-| `get_utm_tags` | UTM tags used to track dispatches |
-| `send_message` | Send a text via WhatsApp, Telegram (tdlib), Telegram Bot, SMS, VK/OK or MAX — with cascade, scheduling, priority and reply-to |
-| `send_bulk` | Send the same message to many phone numbers at once |
-| `send_file` | Send a document, image, audio or video from a local path, URL or base64 (up to 100 MB; base64 only on the hosted server) |
-| `get_delivery_status` | Status and details of a delivery, explained in plain words |
-| `delete_delivery` | Delete a delivered WhatsApp/Telegram message on all recipient devices |
-| `get_phone_info` | Country, operator and normalized format of a phone number |
-| `create_webhook` · `get_webhook` · `list_webhooks` · `update_webhook` · `delete_webhook` | Subscribe your backend to incoming messages, delivery statuses and login events |
-| `set_chat_client_name` | Rename a contact in the ChatPush web messenger |
-| `get_messenger_auth_link` | Link to the QR page that connects WhatsApp or a personal Telegram account |
-| `create_sub_customer` · `list_sub_customers` · `get_sub_customer` | Multi-account: create and inspect sub-clients, each with its own token |
+<a href="https://glama.ai/mcp/servers/@ChatPush/mcp-chatpush"><img width="380" height="200" src="https://glama.ai/mcp/servers/@ChatPush/mcp-chatpush/badge" alt="ChatPush MCP Server на Glama" /></a>
 
-## Get a token
+## Содержание
 
-Sign up at **[chatpush.ru](https://chatpush.ru)** and copy the API token from the dashboard. To send through WhatsApp or Telegram, connect the messenger in the dashboard first — or call `get_messenger_auth_link` and scan the QR code.
+- [Как получить токен](#как-получить-токен)
+- [Быстрый старт](#быстрый-старт): [Claude Desktop](#claude-desktop), [Claude Code](#claude-code), [Cursor](#cursor), [VS Code](#vs-code), [другие агенты](#другие-ии-агенты-и-клиенты)
+- [Что можно попросить у ассистента](#что-можно-попросить-у-ассистента)
+- [Claude + Telegram](#claude--telegram), [Claude + WhatsApp](#claude--whatsapp), [Claude + MAX](#claude--max), [SMS и каскад](#sms-и-каскад-каналов)
+- [Инструменты](#инструменты)
+- [Удалённый сервер по ссылке](#удалённый-mcp-сервер-по-ссылке)
+- [Безопасность](#безопасность) · [Цена](#цена) · [Разработка](#разработка)
 
-## Remote mode (hosted)
+## Как получить токен
 
-> **Launching soon.** `mcp.chatpush.ru` is not live yet — until then use the local mode below.
+1. Зарегистрируйтесь на **[chatpush.ru](https://chatpush.ru/customers/sign_up?utm_source=github&utm_medium=readme&utm_campaign=mcp)**. Первые 10 дней бесплатно.
+2. В личном кабинете откройте раздел **«Интеграции»** (`https://chatpush.ru/front_office/integrations`) и скопируйте API-токен.
+3. Подключите мессенджер, с которого будете писать: MAX, WhatsApp или Telegram подключаются в кабинете по QR-коду. WhatsApp и личный аккаунт Telegram можно подключить и через ассистента: попросите «подключи мне WhatsApp», он пришлёт ссылку на страницу с QR-кодом (инструмент `get_messenger_auth_link`).
 
-The hosted server exposes one MCP endpoint:
+Токен даёт доступ к отправке с вашего аккаунта. Храните его как пароль и не публикуйте в репозиториях.
 
-```
-POST https://mcp.chatpush.ru/mcp
-Authorization: Bearer <ChatPush API token>
-```
-
-- Transport: **Streamable HTTP** (MCP protocol 2025-06-18), JSON responses enabled.
-- **Stateless:** a fresh server instance per request, so it scales horizontally behind any proxy.
-- **No credentials on the server:** the token is read from the request header and used only for that request. Nothing is stored or logged.
-- `GET /healthz` returns `{"status":"ok",...}` without a token, for load-balancer checks.
-- **Files:** `send_file` takes only `file_base64` here. `file_path` and `file_url` are local-mode only: on a shared server they would point at the server's own disk and network. With the default 20 MB request limit, files up to about 14 MB fit.
-
-Connecting from a client that supports remote MCP servers:
-
-```json
-{
-  "url": "https://mcp.chatpush.ru/mcp",
-  "headers": { "Authorization": "Bearer your_token_here" }
-}
-```
-
-### Deployment
-
-```bash
-docker build -t chatpush-mcp-server .
-docker run -p 3000:3000 -e CHATPUSH_ALLOWED_HOSTS=mcp.chatpush.ru chatpush-mcp-server
-```
-
-Without Docker: `npm ci && npm run build && npm run start:http`.
-
-Put TLS in front (nginx, Traefik, a cloud load balancer) and point `mcp.chatpush.ru` at it. The service needs no database, no disk and no secrets.
-
-| Variable | Default | Description |
-| --- | --- | --- |
-| `PORT` | `3000` | Port to listen on |
-| `HOST` | `0.0.0.0` | Interface to bind |
-| `CHATPUSH_MCP_PATH` | `/mcp` | Path of the MCP endpoint |
-| `CHATPUSH_BASE_URL` | `https://api.chatpush.ru` | ChatPush API host |
-| `CHATPUSH_ALLOWED_HOSTS` | — | Comma-separated hostnames accepted in the `Host` header of `/mcp` requests (port ignored), e.g. `mcp.chatpush.ru`. **Required in production:** it blocks DNS-rebinding attacks. Empty = any host, with a warning at startup |
-| `CHATPUSH_MAX_BODY_MB` | `20` | Largest request body, in MB. Bigger requests get 413 before they are read |
-| `CHATPUSH_MAX_CONCURRENT_REQUESTS` | `32` | MCP requests handled at once; the rest get 503 with `Retry-After` |
-| `CHATPUSH_ALLOWED_ORIGIN` | `*` | Value for `Access-Control-Allow-Origin` |
-| `CHATPUSH_DEBUG` | `0` | `1` logs every request (method and URL) to stderr. Read requests carry IDs and phone numbers in the URL, so keep it off in production |
-
-## Local mode (stdio)
-
-Requires Node.js 20 or newer.
+## Быстрый старт
 
 ### Claude Desktop
 
-*Settings → Developer → Edit Config* (`claude_desktop_config.json`):
+Самый простой способ, без Node.js и файлов настроек:
+
+1. Скачайте расширение [`chatpush-mcp-server.mcpb`](https://github.com/ChatPush/mcp-chatpush/releases/latest/download/chatpush-mcp-server.mcpb) (Windows и macOS, всегда последняя версия).
+2. Откройте файл и нажмите **«Установить»**.
+3. Вставьте токен. Claude хранит его как секрет.
+
+Вручную: *Settings → Developer → Edit Config* (`claude_desktop_config.json`):
 
 ```json
 {
@@ -97,7 +54,7 @@ Requires Node.js 20 or newer.
     "chatpush": {
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "your_token_here" }
+      "env": { "CHATPUSH_TOKEN": "ваш_токен" }
     }
   }
 }
@@ -106,21 +63,21 @@ Requires Node.js 20 or newer.
 ### Claude Code
 
 ```bash
-claude mcp add chatpush --env CHATPUSH_TOKEN=your_token_here -- npx -y chatpush-mcp-server
+claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpush-mcp-server
 ```
 
 ### Cursor
 
-Add the same `mcpServers` block to `~/.cursor/mcp.json`.
+Добавьте тот же блок `mcpServers` в `~/.cursor/mcp.json`.
 
 ### VS Code
 
-`.vscode/mcp.json` — VS Code asks for the token and keeps it out of the file:
+`.vscode/mcp.json`. VS Code сам спросит токен и не запишет его в файл:
 
 ```json
 {
   "inputs": [
-    { "type": "promptString", "id": "chatpush_token", "description": "ChatPush token", "password": true }
+    { "type": "promptString", "id": "chatpush_token", "description": "Токен ChatPush", "password": true }
   ],
   "servers": {
     "chatpush": {
@@ -133,60 +90,138 @@ Add the same `mcpServers` block to `~/.cursor/mcp.json`.
 }
 ```
 
-## Channels
+### Другие ИИ-агенты и клиенты
 
-`dispatch_routing` is an ordered list of channels. ChatPush tries them one by one and moves to the next only if delivery through the previous one fails. Without it, the default routing from your dashboard is used.
+Подойдёт любой клиент, который запускает MCP-сервер командой (транспорт stdio): команда `npx -y chatpush-mcp-server`, переменная окружения `CHATPUSH_TOKEN`. Нужен Node.js 20 или новее.
 
-| Value | Channel | Recipient |
+### Проверка
+
+Спросите ассистента: **«Какой у меня баланс в ChatPush?»** Если он назвал сумму, всё работает.
+
+Подробные инструкции с примерами: [Claude + Telegram](guides/claude-telegram/), [Claude + WhatsApp](guides/claude-whatsapp/), [Claude + MAX](guides/claude-max/), [Cursor и VS Code](guides/cursor-vscode/). На сайте: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp).
+
+## Что можно попросить у ассистента
+
+| Вы пишете | Что происходит | Инструмент |
 | --- | --- | --- |
-| `whatsapp` | WhatsApp | `phone` or `whatsapp_lid` |
-| `tdlib` | Personal Telegram account | `phone`, `username` or `tdlib_user_id` (negative ID = group chat) |
-| `telegram` | Telegram Bot | `phone` |
+| «Напиши в WhatsApp +7 999 123-45-67: ваш заказ отправлен» | Сообщение уходит с вашего WhatsApp | `send_message` |
+| «Сначала попробуй MAX, если не дойдёт — SMS: ваш код 4821» | Каскад каналов | `send_message` |
+| «Напомни клиенту 79991234567 завтра в 9:00 о записи» | Отложенная отправка | `send_message` |
+| «Отправь счёт invoice.pdf на номер 79991234567» | Отправка файла | `send_file` |
+| «Разошли этот текст по списку номеров» | Массовая рассылка | `send_bulk` |
+| «Дошло ли сообщение 94396942?» | Статус доставки простыми словами | `get_delivery_status` |
+| «Сколько у меня денег в ChatPush?» | Баланс и подключённые каналы | `get_balance` |
+| «Подключи мне WhatsApp» | Ссылка на страницу с QR-кодом | `get_messenger_auth_link` |
+
+## Claude + Telegram
+
+Claude пишет клиентам в Telegram двумя способами:
+
+- **Личный аккаунт Telegram** (канал `tdlib`): сообщение приходит от вашего аккаунта. Получателя можно указать номером телефона, именем пользователя (`@username`) или ID чата. Отрицательный ID — групповой чат.
+- **Telegram-бот** (канал `telegram`): сообщение приходит от вашего бота, получатель указывается номером телефона.
+
+Примеры: «Напиши в Telegram @ivan_petrov: договор готов, отправил на почту», «Отправь в наш рабочий чат отчёт за неделю файлом». Сообщение, доставленное через личный аккаунт, можно удалить у получателя: «удали сообщение 94396942» (`delete_delivery`).
+
+Инструкция по шагам: [guides/claude-telegram](guides/claude-telegram/).
+
+## Claude + WhatsApp
+
+Сообщения уходят с вашего номера WhatsApp, подключённого к ChatPush по QR-коду. Если номер ещё не подключён, попросите Claude: «подключи мне WhatsApp».
+
+Примеры: «Напиши в WhatsApp 79991234567: мастер приедет завтра с 10 до 12», «Отправь клиенту прайс price.pdf в WhatsApp». Доставленное сообщение можно удалить у получателя (`delete_delivery`).
+
+Инструкция по шагам: [guides/claude-whatsapp](guides/claude-whatsapp/).
+
+## Claude + MAX
+
+MAX — российский мессенджер. Через ChatPush ассистент отправляет сообщения в MAX по номеру телефона, отдельно или первым шагом каскада.
+
+Примеры: «Напиши в MAX 79991234567: ваш заказ готов к выдаче», «Сначала MAX, если не дойдёт — WhatsApp, потом SMS: запись на 15:00 подтверждена».
+
+Инструкция по шагам: [guides/claude-max](guides/claude-max/).
+
+## SMS и каскад каналов
+
+`dispatch_routing` — упорядоченный список каналов. ChatPush пробует их по очереди и переходит к следующему, только если через предыдущий сообщение не доставлено. Если список не задан, работает порядок по умолчанию из вашего кабинета.
+
+| Значение | Канал | Получатель |
+| --- | --- | --- |
+| `max` | MAX | `phone` |
+| `whatsapp` | WhatsApp | `phone` или `whatsapp_lid` |
+| `tdlib` | Личный аккаунт Telegram | `phone`, `username` или `tdlib_user_id` (отрицательный ID — групповой чат) |
+| `telegram` | Telegram-бот | `phone` |
+| `notify` | Уведомления VK / OK | `phone` |
 | `sms` | SMS | `phone` |
-| `notify` | VK / OK notifications | `phone` |
-| `max` | MAX messenger | `phone` |
 
-## Usage examples
+Текст сообщения — до 3500 знаков; если в маршруте есть SMS, до 938 знаков. Подробнее про каскад: [chatpush.ru/blog/kaskad](https://chatpush.ru/blog/kaskad?utm_source=github&utm_medium=readme&utm_campaign=mcp).
 
-| Say | Tool |
+## Инструменты
+
+| Инструмент | Что делает |
 | --- | --- |
-| "Send a WhatsApp message to +7 999 123-45-67: your order has shipped." | `send_message` |
-| "Try WhatsApp first, then SMS: your code is 4821." | `send_message` (cascade) |
-| "Remind 79991234567 tomorrow at 09:00 UTC about the appointment." | `send_message` (scheduled) |
-| "Send invoice.pdf to 79991234567." | `send_file` |
-| "Was message 94396942 delivered?" | `get_delivery_status` |
-| "Connect my WhatsApp." | `get_messenger_auth_link` |
-| "Create a sub-client called Acme." | `create_sub_customer` |
-| "Rename the contact 79991234567 to Ivan from Acme." | `set_chat_client_name` |
+| `send_message` | Текстовое сообщение в MAX, WhatsApp, Telegram (личный аккаунт или бот), SMS, VK/OK: каскад, отложенная отправка, приоритет, ответ на сообщение |
+| `send_bulk` | Одно сообщение на много номеров сразу |
+| `send_file` | Документ, фото, аудио или видео с диска, по ссылке или в base64 (до 100 МБ) |
+| `get_delivery_status` | Статус и детали доставки понятными словами |
+| `delete_delivery` | Удалить доставленное сообщение WhatsApp или Telegram на всех устройствах получателя |
+| `get_phone_info` | Страна, оператор и нормальный формат номера |
+| `get_account` | Аккаунт целиком: баланс, маршрут отправки, имена отправителя, подписка, состояние WhatsApp и Telegram |
+| `get_balance` | Баланс, ID клиента, каналы маршрута и имена отправителя |
+| `get_utm_tags` | UTM-метки для статистики рассылок |
+| `get_messenger_auth_link` | Ссылка на страницу с QR-кодом для подключения WhatsApp или личного Telegram |
+| `set_chat_client_name` | Переименовать контакт в веб-мессенджере ChatPush |
+| `create_webhook` · `get_webhook` · `list_webhooks` · `update_webhook` · `delete_webhook` | Подписать свой сервис на входящие сообщения, статусы доставки и события входа |
+| `create_sub_customer` · `list_sub_customers` · `get_sub_customer` | Субаккаунты для партнёров и агентств, у каждого свой токен |
 
-## Behaviour
+Ответы клиентов приходят в веб-мессенджер ChatPush. Разработчик может получать входящие в свой сервис через вебхуки.
 
-- GET and DELETE send parameters in the URL query string. POST, PUT and PATCH send them in the request body (`send_file` as `multipart/form-data`), so message text and phone numbers stay out of URLs and long texts don't hit the URL length limit.
-- Incompatible parameters (a Telegram `username` without the `tdlib` channel, `scheduled_at` in the past) are rejected before any request is sent.
-- HTTP 429 is retried up to 3 times with exponential backoff, honouring `Retry-After`; 5xx twice — except for requests that send messages, so nothing is sent twice.
-- Requests time out after 30 seconds.
-- Errors come back as readable tool errors, e.g. `Invalid ChatPush token. Check your CHATPUSH_TOKEN.`
-- All logs go to stderr; stdout carries the MCP protocol in stdio mode.
+## Удалённый MCP-сервер по ссылке
 
-## Development
+> **Скоро.** Адрес `mcp.chatpush.ru` ещё не запущен. Пока пользуйтесь расширением для Claude Desktop или запуском через `npx`.
+
+Удалённый сервер нужен платформам, которые подключают MCP по ссылке, и тем, у кого нет Node.js:
+
+```
+POST https://mcp.chatpush.ru/mcp
+Authorization: Bearer <API-токен ChatPush>
+```
+
+- Транспорт: **Streamable HTTP** (протокол MCP 2025-06-18).
+- **Токен не хранится на сервере:** он приходит в заголовке запроса и используется только для этого запроса.
+- `send_file` на удалённом сервере принимает только `file_base64` (до 14 МБ при стандартном лимите запроса 20 МБ). Файлы с диска и по ссылке — в локальном режиме.
+
+Как развернуть сервер у себя (Docker, переменные окружения): [README.en.md → Deployment](README.en.md#deployment).
+
+## Безопасность
+
+- ИИ-ассистент отправляет **настоящие сообщения настоящим клиентам**. Проверяйте текст и список номеров перед рассылкой.
+- Рассылайте только по своей базе и с согласия получателей (ст. 18 закона «О рекламе»).
+- Не публикуйте токен. В настройках VS Code используйте `inputs`, в Claude Desktop — расширение: токен хранится как секрет.
+- В ответах модели токен аккаунта скрыт. Сервер не отправляет сообщение повторно после сбоя сети: сначала проверяется статус.
+
+Политика конфиденциальности: [PRIVACY.md](PRIVACY.md).
+
+## Цена
+
+MCP-сервер бесплатный и открытый. Отправка сообщений оплачивается по вашему тарифу ChatPush: [тарифы на chatpush.ru](https://chatpush.ru/?utm_source=github&utm_medium=readme&utm_campaign=mcp). Первые 10 дней бесплатно.
+
+## Разработка
 
 ```bash
 npm install
-cp .env.example .env     # put your token in .env
+cp .env.example .env     # впишите токен в .env
 npm run build
 npm run dev              # stdio
-npm run dev:http         # remote, http://localhost:3000/mcp
-npm test                 # unit tests
+npm run dev:http         # удалённый режим, http://localhost:3000/mcp
+npm test                 # модульные тесты
 ```
 
-| Script | What it does |
-| --- | --- |
-| `npm test` | Unit tests (`node:test`): validation, retries, double-send protection, hosted-server limits |
-| `npm run typecheck` | Type-check the sources and the tests |
-| `npm run check` | Versions in sync across `package.json` / `server.json` / `manifest.json` and all 19 tools exposed |
-| `npm run build:mcpb` | Build the Claude Desktop extension into `build/chatpush-mcp-server.mcpb` |
-| `npm run inspector` | Open the MCP Inspector against the local server |
+Поведение сервера, переменные окружения и скрипты описаны в [README.en.md](README.en.md#behaviour). Для ИИ-агентов: [AGENTS.md](AGENTS.md) и [llms.txt](llms.txt).
 
-## License
+## Лицензия
 
 [MIT](LICENSE)
+
+---
+
+\*WhatsApp принадлежит компании Meta, признанной экстремистской организацией и запрещённой в РФ.

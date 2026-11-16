@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.ChatPush/mcp-chatpush",
   "title": "ChatPush",
-  "description": "Send WhatsApp, Telegram, SMS and MAX messages, files and bulk mailings via ChatPush",
-  "websiteUrl": "https://chatpush.ru",
+  "description": "WhatsApp, Telegram, MAX & SMS for AI agents: send messages, files and bulk mailings via ChatPush",
+  "websiteUrl": "https://chatpush.ru/integrations/mcp",
   "repository": {
     "url": "https://github.com/ChatPush/mcp-chatpush",
     "source": "github"

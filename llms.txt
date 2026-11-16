@@ -1,0 +1,24 @@
+# ChatPush MCP Server
+
+> Official open-source (MIT) MCP server for ChatPush, a Russian business messaging service. It lets Claude, Cursor, VS Code and other AI agents send WhatsApp, Telegram (personal account or bot), MAX, SMS and VK/OK messages, files and bulk mailings, check delivery status and connect a messenger by QR code. npm package: chatpush-mcp-server. MCP Registry name: io.github.ChatPush/mcp-chatpush.
+
+Requires a ChatPush API token (sign up at https://chatpush.ru, 10 days free; token in Dashboard → Integrations). Runs locally via `npx -y chatpush-mcp-server` with env CHATPUSH_TOKEN, or as a Claude Desktop extension (.mcpb). The hosted endpoint https://mcp.chatpush.ru/mcp is launching soon.
+
+## Docs
+
+- [README (Russian)](https://github.com/ChatPush/mcp-chatpush/blob/main/README.md): setup for Claude Desktop, Claude Code, Cursor, VS Code; tools; channels and cascade
+- [README (English)](https://github.com/ChatPush/mcp-chatpush/blob/main/README.en.md): same in English, plus remote mode, deployment and behaviour details
+- [AGENTS.md](https://github.com/ChatPush/mcp-chatpush/blob/main/AGENTS.md): how an agent should install the server and call its tools safely
+- [Guides](https://github.com/ChatPush/mcp-chatpush/tree/main/guides): Claude + Telegram, Claude + WhatsApp, Claude + MAX, Cursor and VS Code (Russian)
+
+## Product
+
+- [ChatPush MCP page](https://chatpush.ru/integrations/mcp): what the server does, setup, pricing
+- [Channel cascade](https://chatpush.ru/blog/kaskad): how ChatPush falls back from one messenger to the next
+- [ChatPush API](https://chatpush.ru/services/apismpp)
+
+## Optional
+
+- [npm package](https://www.npmjs.com/package/chatpush-mcp-server)
+- [Claude Desktop extension](https://github.com/ChatPush/mcp-chatpush/releases/latest/download/chatpush-mcp-server.mcpb)
+- [Privacy policy](https://github.com/ChatPush/mcp-chatpush/blob/main/PRIVACY.md)
