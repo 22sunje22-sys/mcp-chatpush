@@ -43,7 +43,7 @@
 Самый простой способ, без Node.js и файлов настроек:
 
 1. Скачайте расширение [`chatpush-mcp-server.mcpb`](https://github.com/ChatPush/mcp-chatpush/releases/latest/download/chatpush-mcp-server.mcpb) (Windows и macOS, всегда последняя версия).
-2. Откройте файл и нажмите **«Установить»**.
+2. Откройте файл и нажмите **Install** («Установить»).
 3. Вставьте токен. Claude хранит его как секрет.
 
 Вручную: *Settings → Developer → Edit Config* (`claude_desktop_config.json`):

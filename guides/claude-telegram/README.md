@@ -14,7 +14,7 @@
 
 ## Шаг 3. Подключите ChatPush к Claude
 
-**Claude Desktop** (Windows, macOS): скачайте расширение [`chatpush-mcp-server.mcpb`](https://github.com/ChatPush/mcp-chatpush/releases/latest/download/chatpush-mcp-server.mcpb), откройте файл, нажмите «Установить» и вставьте токен.
+**Claude Desktop** (Windows, macOS): скачайте расширение [`chatpush-mcp-server.mcpb`](https://github.com/ChatPush/mcp-chatpush/releases/latest/download/chatpush-mcp-server.mcpb), откройте файл, нажмите Install («Установить») и вставьте токен.
 
 **Claude Code**, одной командой в терминале (нужен Node.js 20+):
 
