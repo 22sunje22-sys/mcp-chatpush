@@ -6,7 +6,7 @@
 
 **Русский** · [English](README.en.md)
 
-Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, Cursor, VS Code или своему ИИ-агенту, и ассистент сам отправит сообщение, файл или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании. Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
+Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, Cursor, VS Code или своему ИИ-агенту, и ассистент сам отправит сообщение или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании, а файл — в WhatsApp или Telegram. Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
 
 *MCP server for WhatsApp, Telegram, MAX and SMS: Claude and AI agents send messages, files and bulk mailings through a ChatPush business account. [English README](README.en.md).*
 
@@ -66,13 +66,15 @@
 claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpush-mcp-server
 ```
 
+Команда подключает сервер к проекту в текущей папке. Чтобы он был доступен во всех проектах, добавьте `--scope user` после `add`.
+
 ### Cursor
 
 Добавьте тот же блок `mcpServers` в `~/.cursor/mcp.json`.
 
 ### VS Code
 
-`~/.copilot/mcp-config.json`. Проще всего через команду `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, либо создайте файл вручную. Он лежит в домашней папке и не попадает в репозиторий проекта:
+`~/.copilot/mcp-config.json`. Проще всего из палитры команд: `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`. Или создайте файл вручную. Он лежит в домашней папке и не попадает в репозиторий проекта:
 
 ```json
 {
@@ -81,7 +83,8 @@ claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpus
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "ваш_токен" }
+      "env": { "CHATPUSH_TOKEN": "ваш_токен" },
+      "tools": ["*"]
     }
   }
 }
@@ -117,7 +120,7 @@ claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpus
 Claude пишет клиентам в Telegram двумя способами:
 
 - **Личный аккаунт Telegram** (канал `tdlib`): сообщение приходит от вашего аккаунта. Получателя можно указать номером телефона, именем пользователя (`@username`) или ID чата. Отрицательный ID — групповой чат.
-- **Telegram-бот** (канал `telegram`): сообщение приходит от вашего бота, получатель указывается номером телефона.
+- **Telegram-бот** (канал `telegram`): сообщение приходит от вашего бота, получатель указывается номером телефона. Бот пишет только тем, кто сам его запустил.
 
 Примеры: «Напиши в Telegram @ivan_petrov: договор готов, отправил на почту», «Отправь в наш рабочий чат отчёт за неделю файлом». Сообщение, доставленное через личный аккаунт, можно удалить у получателя: «удали сообщение 94396942» (`delete_delivery`).
 
@@ -160,7 +163,7 @@ MAX — российский мессенджер. Через ChatPush асси�
 | --- | --- |
 | `send_message` | Текстовое сообщение в MAX, WhatsApp, Telegram (личный аккаунт или бот), SMS, VK/OK: каскад, отложенная отправка, приоритет, ответ на сообщение |
 | `send_bulk` | Одно сообщение на много номеров сразу |
-| `send_file` | Документ, фото, аудио или видео с диска, по ссылке или в base64 (до 100 МБ) |
+| `send_file` | Документ, фото, аудио или видео в WhatsApp или Telegram: с диска, по ссылке или в base64 (до 100 МБ) |
 | `get_delivery_status` | Статус и детали доставки понятными словами |
 | `delete_delivery` | Удалить доставленное сообщение WhatsApp или Telegram на всех устройствах получателя |
 | `get_phone_info` | Страна, оператор и нормальный формат номера |

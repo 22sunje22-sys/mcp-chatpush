@@ -136,7 +136,7 @@ Add the same `mcpServers` block to `~/.cursor/mcp.json`.
 
 ### VS Code
 
-`~/.copilot/mcp-config.json` — run `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, or create the file by hand. It lives in your home folder, outside the project repository:
+`~/.copilot/mcp-config.json` — from the Command Palette run `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, or create the file by hand. It lives in your home folder, outside the project repository:
 
 ```json
 {
@@ -145,7 +145,8 @@ Add the same `mcpServers` block to `~/.cursor/mcp.json`.
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "your_token_here" }
+      "env": { "CHATPUSH_TOKEN": "your_token_here" },
+      "tools": ["*"]
     }
   }
 }

@@ -25,7 +25,7 @@
 }
 ```
 
-**VS Code** — `~/.copilot/mcp-config.json`. Проще всего через команду `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, либо создайте файл вручную. Он лежит в домашней папке и не попадает в репозиторий проекта:
+**VS Code** — `~/.copilot/mcp-config.json`. Проще всего из палитры команд: `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`. Или создайте файл вручную. Он лежит в домашней папке и не попадает в репозиторий проекта:
 
 ```json
 {
@@ -34,7 +34,8 @@
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "ваш_токен" }
+      "env": { "CHATPUSH_TOKEN": "ваш_токен" },
+      "tools": ["*"]
     }
   }
 }
