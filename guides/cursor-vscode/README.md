@@ -25,23 +25,22 @@
 }
 ```
 
-**VS Code** — `.vscode/mcp.json`. Редактор спросит токен и не запишет его в файл:
+**VS Code** — `~/.copilot/mcp-config.json`. Проще всего через команду `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, либо создайте файл вручную. Он лежит в домашней папке и не попадает в репозиторий проекта:
 
 ```json
 {
-  "inputs": [
-    { "type": "promptString", "id": "chatpush_token", "description": "Токен ChatPush", "password": true }
-  ],
-  "servers": {
+  "mcpServers": {
     "chatpush": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "${input:chatpush_token}" }
+      "env": { "CHATPUSH_TOKEN": "ваш_токен" }
     }
   }
 }
 ```
+
+Старый формат `.vscode/mcp.json` с `servers` и `inputs` VS Code поддерживает до февраля 2027 года ([документация VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)).
 
 Другие редакторы и агенты, которые запускают MCP-серверы командой (stdio): `npx -y chatpush-mcp-server` и переменная `CHATPUSH_TOKEN`.
 
@@ -58,7 +57,7 @@
 | «Подпиши https://example.com/hooks на входящие сообщения» | `create_webhook` |
 | «Какой оператор у номера 79991234567?» | `get_phone_info` |
 
-Не храните токен в репозитории: для VS Code используйте `inputs`, для Cursor — глобальный файл в домашней папке.
+Не храните токен в репозитории: для Cursor и VS Code используйте файлы настроек в домашней папке.
 
 ## Ссылки
 

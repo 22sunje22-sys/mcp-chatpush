@@ -72,23 +72,22 @@ claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpus
 
 ### VS Code
 
-`.vscode/mcp.json`. VS Code сам спросит токен и не запишет его в файл:
+`~/.copilot/mcp-config.json`. Проще всего через команду `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, либо создайте файл вручную. Он лежит в домашней папке и не попадает в репозиторий проекта:
 
 ```json
 {
-  "inputs": [
-    { "type": "promptString", "id": "chatpush_token", "description": "Токен ChatPush", "password": true }
-  ],
-  "servers": {
+  "mcpServers": {
     "chatpush": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "${input:chatpush_token}" }
+      "env": { "CHATPUSH_TOKEN": "ваш_токен" }
     }
   }
 }
 ```
+
+Старый формат `.vscode/mcp.json` с `servers` и `inputs` VS Code поддерживает до февраля 2027 года ([документация VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)).
 
 ### Другие ИИ-агенты и клиенты
 
@@ -196,7 +195,7 @@ Authorization: Bearer <API-токен ChatPush>
 
 - ИИ-ассистент отправляет **настоящие сообщения настоящим клиентам**. Проверяйте текст и список номеров перед рассылкой.
 - Рассылайте только по своей базе и с согласия получателей (ст. 18 закона «О рекламе»).
-- Не публикуйте токен. В настройках VS Code используйте `inputs`, в Claude Desktop — расширение: токен хранится как секрет.
+- Не публикуйте токен. Держите токен в файлах настроек в домашней папке, в Claude Desktop ставьте расширение: токен хранится как секрет.
 - В ответах модели токен аккаунта скрыт. Сервер не отправляет сообщение повторно после сбоя сети: сначала проверяется статус.
 
 Политика конфиденциальности: [PRIVACY.md](PRIVACY.md).
