@@ -27,7 +27,8 @@ for (const entry of ["dist", "manifest.json", "package.json", "package-lock.json
   cpSync(join(root, entry), join(stage, entry), { recursive: true })
 }
 
-// The icon is optional until the ChatPush logo lands in the repo.
+// icon.png (512x512, the ChatPush logo) ships in the repo; the fallback
+// keeps the build working if it is ever removed.
 if (existsSync(join(root, "icon.png"))) {
   cpSync(join(root, "icon.png"), join(stage, "icon.png"))
 } else {
