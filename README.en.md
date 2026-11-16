@@ -136,23 +136,22 @@ Add the same `mcpServers` block to `~/.cursor/mcp.json`.
 
 ### VS Code
 
-`.vscode/mcp.json` — VS Code asks for the token and keeps it out of the file:
+`~/.copilot/mcp-config.json` — run `Chat: Open Customizations` → `MCP Servers` → `Add Server` → `Global` → `Copilot Global`, or create the file by hand. It lives in your home folder, outside the project repository:
 
 ```json
 {
-  "inputs": [
-    { "type": "promptString", "id": "chatpush_token", "description": "ChatPush token", "password": true }
-  ],
-  "servers": {
+  "mcpServers": {
     "chatpush": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chatpush-mcp-server"],
-      "env": { "CHATPUSH_TOKEN": "${input:chatpush_token}" }
+      "env": { "CHATPUSH_TOKEN": "your_token_here" }
     }
   }
 }
 ```
+
+The older `.vscode/mcp.json` format with `servers` and `inputs` is supported until February 2027 ([VS Code docs](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)).
 
 ## Channels
 
