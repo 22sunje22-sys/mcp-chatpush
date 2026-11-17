@@ -16,7 +16,9 @@ import { webhookTools } from "./tools/webhooks.js"
 
 const INSTRUCTIONS = `ChatPush sends WhatsApp, Telegram (personal account or bot), SMS, VK/OK and MAX messages.
 Typical flow: get_account (is WhatsApp/Telegram authorized, is the subscription active) → send_message / send_file / send_bulk → get_delivery_status.
-Phone numbers use international format with the country code, e.g. 79991234567.`
+Phone numbers use international format with the country code, e.g. 79991234567.
+These tools send real messages to real people. Before send_bulk, or before messaging more than a few recipients, show the user the text, the channel route and the number of recipients and wait for an explicit yes.
+Never repeat a send after an error or an unclear result: check get_delivery_status first.`
 
 export const tools: AnyToolDefinition[] = [
   ...accountTools,
