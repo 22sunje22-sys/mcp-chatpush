@@ -210,7 +210,9 @@ npm test                 # unit tests
 
 ## Guides
 
-Step-by-step guides (in Russian) live in [`guides/`](guides/): [Claude + Telegram](guides/claude-telegram/), [Claude + WhatsApp](guides/claude-whatsapp/), [Claude + MAX](guides/claude-max/), [Cursor and VS Code](guides/cursor-vscode/). Product page: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme_en&utm_campaign=mcp).
+Step-by-step guides (in Russian) live in [`guides/`](guides/): Claude + [Telegram](guides/claude-telegram/), [WhatsApp](guides/claude-whatsapp/), [MAX](guides/claude-max/); [ChatGPT and Codex](guides/chatgpt-codex/), [Gemini CLI](guides/gemini-cli/), [GitHub Copilot](guides/github-copilot/), [Cursor and VS Code](guides/cursor-vscode/), [OpenClaw](guides/openclaw/), [n8n](guides/n8n/), [other clients](guides/other-clients/).
+
+Codex / ChatGPT desktop: `codex mcp add chatpush --env CHATPUSH_TOKEN=<token> -- npx -y chatpush-mcp-server`. Gemini CLI: `gemini mcp add -s user -e CHATPUSH_TOKEN=<token> chatpush npx -y chatpush-mcp-server`. GitHub Copilot CLI: `copilot mcp add --env CHATPUSH_TOKEN=<token> chatpush -- npx -y chatpush-mcp-server`. Product page: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme_en&utm_campaign=mcp).
 
 For AI agents: see [`AGENTS.md`](AGENTS.md), [`llms.txt`](llms.txt) and the agent skill [`skills/chatpush/SKILL.md`](skills/chatpush/SKILL.md).
 
