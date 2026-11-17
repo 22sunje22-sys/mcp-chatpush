@@ -211,14 +211,14 @@ const sendFile = defineTool({
   name: "send_file",
   title: "Send file",
   description: [
-    "Send a file (document, image, audio, video, contact) to a recipient via WhatsApp or Telegram. File is uploaded as multipart/form-data. Images under 10MB sent natively, larger files as download links active for 7 days.",
+    "Send a file (document, image, audio, video, contact) to a recipient via MAX, WhatsApp or Telegram (set the channel in dispatch_routing; SMS cannot carry files). File is uploaded as multipart/form-data. Images under 10MB sent natively, larger files as download links active for 7 days.",
     "Use it when the user wants to share a document, photo, voice message, video or contact card. Provide the file as exactly one of: file_path (local file), file_url (downloaded by the server) or file_base64 (with file_name).",
     `${SUPPORTED_FORMATS_TEXT} Max 100 MB. ${RECIPIENT_TEXT}`,
   ].join("\n\n"),
   remote: {
     omitParams: ["file_path", "file_url"],
     description: [
-      "Send a file (document, image, audio, video, contact) to a recipient via WhatsApp or Telegram. Images under 10MB sent natively, larger files as download links active for 7 days.",
+      "Send a file (document, image, audio, video, contact) to a recipient via MAX, WhatsApp or Telegram (set the channel in dispatch_routing; SMS cannot carry files). Images under 10MB sent natively, larger files as download links active for 7 days.",
       "Use it when the user wants to share a document, photo, voice message, video or contact card. Pass the file content as file_base64 together with file_name (with the extension). This hosted server can't read local files or download URLs.",
       `${SUPPORTED_FORMATS_TEXT} ${RECIPIENT_TEXT}`,
     ].join("\n\n"),
