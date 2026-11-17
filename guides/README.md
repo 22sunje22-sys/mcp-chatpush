@@ -10,6 +10,9 @@
 | [ChatGPT и Codex](chatgpt-codex/) | Приложение ChatGPT для компьютера и Codex отправляют сообщения клиентам |
 | [Gemini CLI и Antigravity CLI](gemini-cli/) | Gemini в терминале пишет клиентам в MAX, WhatsApp, Telegram и SMS |
 | [GitHub Copilot](github-copilot/) | Copilot в VS Code, CLI, JetBrains и Visual Studio отправляет уведомления |
+| [OpenClaw и Hermes Agent](openclaw/) | Агент пишет вашим клиентам в MAX, WhatsApp, Telegram и SMS |
+| [n8n](n8n/) | AI Agent в n8n отправляет сообщения через community-узел MCP |
+| [Другие MCP-клиенты](other-clients/) | LM Studio, Qwen Code, Goose, Zed, Jan, Cherry Studio, DeepSeek и Ollama через клиенты |
 | [Cursor и VS Code](cursor-vscode/) | Уведомления и сообщения прямо из редактора и агентов разработчика |
 
 Полное описание сервера: [README](../README.md). Страница на сайте: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=guide&utm_campaign=mcp).
