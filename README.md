@@ -6,7 +6,7 @@
 
 **Русский** · [English](README.en.md)
 
-Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, Cursor, VS Code или своему ИИ-агенту, и ассистент сам отправит сообщение или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании, а файл — в WhatsApp или Telegram. Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
+Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, Cursor, VS Code или своему ИИ-агенту, и ассистент сам отправит сообщение, файл или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании (файлы — в мессенджеры, по SMS только текст). Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
 
 *MCP server for WhatsApp, Telegram, MAX and SMS: Claude and AI agents send messages, files and bulk mailings through a ChatPush business account. [English README](README.en.md).*
 
@@ -163,7 +163,7 @@ MAX — российский мессенджер. Через ChatPush асси�
 | --- | --- |
 | `send_message` | Текстовое сообщение в MAX, WhatsApp, Telegram (личный аккаунт или бот), SMS, VK/OK: каскад, отложенная отправка, приоритет, ответ на сообщение |
 | `send_bulk` | Одно сообщение на много номеров сразу |
-| `send_file` | Документ, фото, аудио или видео в WhatsApp или Telegram: с диска, по ссылке или в base64 (до 100 МБ) |
+| `send_file` | Документ, фото, аудио или видео в MAX, WhatsApp или Telegram: с диска, по ссылке или в base64 (до 100 МБ) |
 | `get_delivery_status` | Статус и детали доставки понятными словами |
 | `delete_delivery` | Удалить доставленное сообщение WhatsApp или Telegram на всех устройствах получателя |
 | `get_phone_info` | Страна, оператор и нормальный формат номера |

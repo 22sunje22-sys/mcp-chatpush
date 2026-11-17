@@ -36,7 +36,7 @@ It runs in two modes from the same codebase:
 | `get_utm_tags` | UTM tags used to track dispatches |
 | `send_message` | Send a text via WhatsApp, Telegram (tdlib), Telegram Bot, SMS, VK/OK or MAX — with cascade, scheduling, priority and reply-to |
 | `send_bulk` | Send the same message to many phone numbers at once |
-| `send_file` | Send a document, image, audio or video from a local path, URL or base64 (up to 100 MB; base64 only on the hosted server) |
+| `send_file` | Send a document, image, audio or video to MAX, WhatsApp or Telegram from a local path, URL or base64 (up to 100 MB; base64 only on the hosted server) |
 | `get_delivery_status` | Status and details of a delivery, explained in plain words |
 | `delete_delivery` | Delete a delivered WhatsApp/Telegram message on all recipient devices |
 | `get_phone_info` | Country, operator and normalized format of a phone number |

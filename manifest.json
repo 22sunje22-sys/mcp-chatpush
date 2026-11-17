@@ -68,7 +68,7 @@
     },
     {
       "name": "send_file",
-      "description": "Send a document, image, audio or video file"
+      "description": "Send a document, image, audio or video file to MAX, WhatsApp or Telegram"
     },
     {
       "name": "create_webhook",
