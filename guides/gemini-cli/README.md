@@ -14,7 +14,7 @@ Gemini CLI и Antigravity CLI подключают локальные MCP-сер
 gemini mcp add -s user -e CHATPUSH_TOKEN=ваш_токен chatpush npx -y chatpush-mcp-server
 ```
 
-Сервер записывается в `~/.gemini/settings.json`. В папке, которой Gemini CLI ещё не доверяет, сервер будет в статусе Disabled: выполните `gemini trust` в рабочей папке. Проверка: `/mcp` в сессии.
+Сервер записывается в `~/.gemini/settings.json`. В папке, которой Gemini CLI ещё не доверяет, сервер будет в статусе Disabled: при первом запуске в папке выберите *Trust folder* или откройте `/permissions` внутри Gemini CLI. Проверка: `/mcp` в сессии.
 
 ## Antigravity CLI
 
