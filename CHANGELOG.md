@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- MCP Registry name is now `io.github.ChatPush/whatsapp-telegram-max-sms` (searchable by channel names). The old entry `io.github.ChatPush/mcp-chatpush` should be marked deprecated after the release.
+- `send_file` description: files go to MAX, WhatsApp and Telegram.
+- Russian README with an English header, `README.en.md`, `guides/`, `AGENTS.md`, `llms.txt`, agent skill `skills/chatpush/SKILL.md`; npm keywords and homepage.
+
 ## 1.0.0 — 2026-11-16
 
 - Initial ChatPush MCP server: local (stdio) and remote (Streamable HTTP) transports.

@@ -8,14 +8,14 @@
 
 Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, ChatGPT и Codex, Cursor, GitHub Copilot, Gemini CLI или своему ИИ-агенту, и ассистент сам отправит сообщение, файл или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании (файлы — в мессенджеры, по SMS только текст). Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
 
-*MCP server for WhatsApp, Telegram, MAX and SMS: Claude and AI agents send messages, files and bulk mailings through a ChatPush business account. [English README](README.en.md).*
+> **English:** official MCP server for [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp) — AI agents (Claude, ChatGPT/Codex, Cursor, GitHub Copilot, Gemini CLI, n8n) send WhatsApp, Telegram, MAX and SMS messages, files and bulk mailings from a business account, with channel cascade and delivery status. Install: `npx -y chatpush-mcp-server` with `CHATPUSH_TOKEN`. Full English docs: [README.en.md](README.en.md). For agents: [AGENTS.md](AGENTS.md), [llms.txt](llms.txt), [skills/chatpush/SKILL.md](skills/chatpush/SKILL.md).
 
 - **С ваших номеров.** Сообщения уходят с подключённых MAX, WhatsApp и Telegram, как из кабинета ChatPush.
 - **Каскад каналов.** Не дошло в один мессенджер — уйдёт в следующий, SMS последним.
 - **Без двойных отправок.** После сбоя сети сервер не повторяет отправку сам: ассистент сначала проверяет статус.
 - **19 инструментов.** Отправка, рассылки, файлы, статусы доставки, подключение мессенджера по QR, вебхуки, субаккаунты.
 - **Навык для агентов.** [`skills/chatpush/SKILL.md`](skills/chatpush/SKILL.md): когда и как агенту звать ChatPush, с правилами безопасной отправки.
-- **Открытый код.** Лицензия MIT, пакет [`chatpush-mcp-server`](https://www.npmjs.com/package/chatpush-mcp-server) в npm, сервер есть в [официальном каталоге MCP](https://registry.modelcontextprotocol.io) под именем `io.github.ChatPush/mcp-chatpush`.
+- **Открытый код.** Лицензия MIT, пакет [`chatpush-mcp-server`](https://www.npmjs.com/package/chatpush-mcp-server) в npm, сервер есть в [официальном каталоге MCP](https://registry.modelcontextprotocol.io) под именем `io.github.ChatPush/whatsapp-telegram-max-sms`.
 
 <a href="https://glama.ai/mcp/servers/@ChatPush/mcp-chatpush"><img width="380" height="200" src="https://glama.ai/mcp/servers/@ChatPush/mcp-chatpush/badge" alt="ChatPush MCP Server на Glama" /></a>
 
