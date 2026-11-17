@@ -6,7 +6,7 @@
 
 **Русский** · [English](README.en.md)
 
-Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, Cursor, VS Code или своему ИИ-агенту, и ассистент сам отправит сообщение, файл или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании (файлы — в мессенджеры, по SMS только текст). Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
+Официальный MCP-сервер [ChatPush](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp). Подключите его к Claude, ChatGPT и Codex, Cursor, GitHub Copilot, Gemini CLI или своему ИИ-агенту, и ассистент сам отправит сообщение, файл или рассылку в MAX, WhatsApp\*, Telegram и SMS с номеров вашей компании (файлы — в мессенджеры, по SMS только текст). Достаточно написать ему обычную просьбу: «напомни клиенту о записи завтра в 9:00».
 
 *MCP server for WhatsApp, Telegram, MAX and SMS: Claude and AI agents send messages, files and bulk mailings through a ChatPush business account. [English README](README.en.md).*
 
@@ -22,7 +22,7 @@
 ## Содержание
 
 - [Как получить токен](#как-получить-токен)
-- [Быстрый старт](#быстрый-старт): [Claude Desktop](#claude-desktop), [Claude Code](#claude-code), [Cursor](#cursor), [VS Code](#vs-code), [другие агенты](#другие-ии-агенты-и-клиенты)
+- [Быстрый старт](#быстрый-старт): [Claude Desktop](#claude-desktop), [Claude Code](#claude-code), [Cursor](#cursor), [VS Code](#vs-code), [ChatGPT и Codex](#chatgpt-и-codex), [Gemini CLI и Copilot](#gemini-cli-и-github-copilot), [другие агенты](#другие-ии-агенты-и-клиенты)
 - [Что можно попросить у ассистента](#что-можно-попросить-у-ассистента)
 - [Claude + Telegram](#claude--telegram), [Claude + WhatsApp](#claude--whatsapp), [Claude + MAX](#claude--max), [SMS и каскад](#sms-и-каскад-каналов)
 - [Инструменты](#инструменты)
@@ -93,6 +93,23 @@ claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpus
 
 Старый формат `.vscode/mcp.json` с `servers` и `inputs` VS Code поддерживает до февраля 2027 года ([документация VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)).
 
+### ChatGPT и Codex
+
+```bash
+codex mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpush-mcp-server
+```
+
+Приложение ChatGPT для компьютера читает ту же конфигурацию Codex (`~/.codex/config.toml`). ChatGPT в браузере подключает только серверы по ссылке: появится вместе с удалённым сервером. Подробно: [guides/chatgpt-codex](guides/chatgpt-codex/).
+
+### Gemini CLI и GitHub Copilot
+
+```bash
+gemini mcp add -s user -e CHATPUSH_TOKEN=ваш_токен chatpush npx -y chatpush-mcp-server
+copilot mcp add --env CHATPUSH_TOKEN=ваш_токен chatpush -- npx -y chatpush-mcp-server
+```
+
+Подробно: [guides/gemini-cli](guides/gemini-cli/), [guides/github-copilot](guides/github-copilot/).
+
 ### Другие ИИ-агенты и клиенты
 
 Подойдёт любой клиент, который запускает MCP-сервер командой (транспорт stdio): команда `npx -y chatpush-mcp-server`, переменная окружения `CHATPUSH_TOKEN`. Нужен Node.js 20 или новее.
@@ -101,7 +118,7 @@ claude mcp add chatpush --env CHATPUSH_TOKEN=ваш_токен -- npx -y chatpus
 
 Спросите ассистента: **«Какой у меня баланс в ChatPush?»** Если он назвал сумму, всё работает.
 
-Подробные инструкции с примерами: [Claude + Telegram](guides/claude-telegram/), [Claude + WhatsApp](guides/claude-whatsapp/), [Claude + MAX](guides/claude-max/), [Cursor и VS Code](guides/cursor-vscode/). На сайте: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp).
+Подробные инструкции: [все инструкции](guides/) — Claude + [Telegram](guides/claude-telegram/), [WhatsApp](guides/claude-whatsapp/), [MAX](guides/claude-max/); [ChatGPT и Codex](guides/chatgpt-codex/), [Gemini CLI](guides/gemini-cli/), [GitHub Copilot](guides/github-copilot/), [Cursor и VS Code](guides/cursor-vscode/), [OpenClaw](guides/openclaw/), [n8n](guides/n8n/), [другие клиенты](guides/other-clients/). На сайте: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme&utm_campaign=mcp).
 
 ## Что можно попросить у ассистента
 
