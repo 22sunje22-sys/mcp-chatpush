@@ -9,6 +9,7 @@ Requires a ChatPush API token (sign up at https://chatpush.ru, 10 days free; tok
 - [README (Russian)](https://github.com/ChatPush/mcp-chatpush/blob/main/README.md): setup for Claude Desktop, Claude Code, Cursor, VS Code; tools; channels and cascade
 - [README (English)](https://github.com/ChatPush/mcp-chatpush/blob/main/README.en.md): same in English, plus remote mode, deployment and behaviour details
 - [AGENTS.md](https://github.com/ChatPush/mcp-chatpush/blob/main/AGENTS.md): how an agent should install the server and call its tools safely
+- [Agent skill](https://github.com/ChatPush/mcp-chatpush/blob/main/skills/chatpush/SKILL.md): when and how an agent should use ChatPush, safe-sending rules
 - [Guides](https://github.com/ChatPush/mcp-chatpush/tree/main/guides): Claude + Telegram, Claude + WhatsApp, Claude + MAX, Cursor and VS Code (Russian)
 
 ## Product

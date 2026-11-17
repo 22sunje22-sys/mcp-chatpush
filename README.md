@@ -14,6 +14,7 @@
 - **Каскад каналов.** Не дошло в один мессенджер — уйдёт в следующий, SMS последним.
 - **Без двойных отправок.** После сбоя сети сервер не повторяет отправку сам: ассистент сначала проверяет статус.
 - **19 инструментов.** Отправка, рассылки, файлы, статусы доставки, подключение мессенджера по QR, вебхуки, субаккаунты.
+- **Навык для агентов.** [`skills/chatpush/SKILL.md`](skills/chatpush/SKILL.md): когда и как агенту звать ChatPush, с правилами безопасной отправки.
 - **Открытый код.** Лицензия MIT, пакет [`chatpush-mcp-server`](https://www.npmjs.com/package/chatpush-mcp-server) в npm, сервер есть в [официальном каталоге MCP](https://registry.modelcontextprotocol.io) под именем `io.github.ChatPush/mcp-chatpush`.
 
 <a href="https://glama.ai/mcp/servers/@ChatPush/mcp-chatpush"><img width="380" height="200" src="https://glama.ai/mcp/servers/@ChatPush/mcp-chatpush/badge" alt="ChatPush MCP Server на Glama" /></a>
@@ -218,7 +219,7 @@ npm run dev:http         # удалённый режим, http://localhost:3000/
 npm test                 # модульные тесты
 ```
 
-Поведение сервера, переменные окружения и скрипты описаны в [README.en.md](README.en.md#behaviour). Для ИИ-агентов: [AGENTS.md](AGENTS.md) и [llms.txt](llms.txt).
+Поведение сервера, переменные окружения и скрипты описаны в [README.en.md](README.en.md#behaviour). Для ИИ-агентов: [AGENTS.md](AGENTS.md), [llms.txt](llms.txt) и навык [skills/chatpush/SKILL.md](skills/chatpush/SKILL.md).
 
 ## Лицензия
 
