@@ -212,7 +212,7 @@ npm test                 # unit tests
 
 Step-by-step guides (in Russian) live in [`guides/`](guides/): [Claude + Telegram](guides/claude-telegram/), [Claude + WhatsApp](guides/claude-whatsapp/), [Claude + MAX](guides/claude-max/), [Cursor and VS Code](guides/cursor-vscode/). Product page: [chatpush.ru/integrations/mcp](https://chatpush.ru/integrations/mcp?utm_source=github&utm_medium=readme_en&utm_campaign=mcp).
 
-For AI agents: see [`AGENTS.md`](AGENTS.md) and [`llms.txt`](llms.txt).
+For AI agents: see [`AGENTS.md`](AGENTS.md), [`llms.txt`](llms.txt) and the agent skill [`skills/chatpush/SKILL.md`](skills/chatpush/SKILL.md).
 
 ## License
 

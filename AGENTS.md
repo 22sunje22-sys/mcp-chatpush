@@ -17,6 +17,8 @@ Official MCP server for [ChatPush](https://chatpush.ru/integrations/mcp?utm_sour
 
 The hosted endpoint `https://mcp.chatpush.ru/mcp` (Streamable HTTP, `Authorization: Bearer <token>`) is not live yet; use the local mode.
 
+A ready agent skill with the same rules: [`skills/chatpush/SKILL.md`](skills/chatpush/SKILL.md).
+
 ## Calling the tools safely
 
 - `send_message`, `send_bulk` and `send_file` deliver **real messages to real people**. Confirm the recipient list and the text with the user before a bulk send.
